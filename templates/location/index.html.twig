@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <div class="container mt-5" >
+
+        <h1 class="mt-4 mb-3">Les offres
+            <small>de locations</small>
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Locations</li>
+
+        </ol>
+
+        <div class="row flex">
+            {% for property in properties%}
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 text-center">
+                        <img class="card-img-top" src="{{ asset(property.path) }}" alt="{{ property.title }}">
+                        <div class="card-body">
+                            <a href="{{ path('property.show', {id : property.id}) }}" class="card-title">{{ property.title }}</a>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ property.price | number_format(0,'',' ')}} dt</h6>
+                            <p class="card-text">{{ property.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('property.show', {id : property.id}) }}" class="btn btn-primary">Détails</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!-- /.row -->
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer le bien {% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-4">
+    <h2>Editer le bien</h2> 
+    <div class="float-right">
+
+    </div>
+    <div class="col-md-4">
+        {{form_row(form.sold)}}
+    </div>
+    {{include ('admin_property/_form.html.twig', {form: form, button:'Editer'})}}
+    
+</div>
+{% endblock %}

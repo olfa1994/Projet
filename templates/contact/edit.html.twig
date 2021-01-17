@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer le bien {% endblock %}
+
+{% block body %}
+
+
+    <div class="container ">
+        <br>
+        <h2>Editer mon contact</h2>
+        <div class="float-right">
+
+        </div>
+
+        {{include ('contact/_form.html.twig', {form: form, button:'Editer'})}}
+
+        <br>
+    </div>
+
+{% endblock %}

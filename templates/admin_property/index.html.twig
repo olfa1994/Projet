@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer nos biens {% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-4">
+  {% if app.user %}
+    <div class="mb-3">
+    Bonjour {{ app.user.username }}, Appuyez là pour  <a href="{{ path('admin.contact.edit',{id: 1}) }}">Modifier votre contact</a>
+  </div>
+  {% endif %}
+    <h2>Gérer nos biens</h2>
+  <div class="text-right ">
+    <a class="btn btn-warning" href="{{path('admin.property.create')}}">Créer un nouveau bien</a>
+  </div>
+<table class=" table" id="tablex">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#id</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Ville</th>
+      <th scope="col">Nature</th>
+      <th scope="col">Type</th>
+      <th scope="col">Actions</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  {%for property in properties%}
+    <tr {% if property.sold >0 %} class="table-warning" {% else %}td class="table-success" {% endif %}>
+      <td scope="row">{{property.id}}</td>
+      
+      <td>{{property.title}}</td>
+      <td>{{property.ville}}</td>
+      <td>{% if property.location >0 %}Location {% else %} Vente {% endif %}</td>
+      <td>{{property.type}}</td>
+
+      <td><a href="{{path('admin.property.edit',{id:property.id})}}" class="btn btn-info"> Editer</a>
+          <form method="post" action="{{ path('admin.property.delete',{id: property.id}) }}" style="display: inline-block" onsubmit="return confirm('Supprimer la propriété {{property.title}}??')">
+            <input type="hidden" name="_method" value="DELETE">
+
+            <button type="submit" class="btn btn-danger">Supprimer ce bien</button>
+          </form> </td>
+      
+    </tr>
+    {%endfor%}
+    
+   
+  </tbody>
+</table>
+
+
+</div>
+  <script >
+    $(document).ready(function() {
+      $('#tablex').DataTable(
+
+              {
+                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "iDisplayLength": 5
+              }
+      );
+    } );
+  </script>
+{% endblock %}

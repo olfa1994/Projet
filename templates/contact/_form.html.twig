@@ -1,0 +1,32 @@
+{{form_start(form)}}
+<div class="row">
+    <div class="col-md-4">
+        {{form_row(form.address)}}
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        {{form_row(form.mail)}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        {{form_row(form.num)}}
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-2">
+        {{form_row(form.heurDeb)}}
+    </div>
+    <div class="col-md-2">
+        {{form_row(form.heurFin)}}
+    </div>
+</div>
+
+{{form_rest(form)}}
+<button class="btn btn-primary" >{{ button|default('Enregistrer') }}</button>
+{{form_end(form)}}

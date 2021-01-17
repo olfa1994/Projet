@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Properties{% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-5">
+
+    <h1 class="mt-4 mb-3">Le bien
+        <small>{{ property.title }} </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('property.index') }}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">détails</li>
+    </ol>
+
+    <!-- Intro Content -->
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="img-fluid rounded mb-4" src="{{ asset(property.path) }}" alt="{{ property.title }}">
+        </div>
+        <div class="col-lg-6">
+            <h1>{{ property.title }}</h1>
+            <p>
+                <abbr title="Type">Type</abbr>: {{ property.type }}
+            </p>
+            <h2>{{ property.rooms }} pièces - {{ property.surface }} m² </h2>
+            <div class="text-primary" style="font-size:4rem; font-weight:bold;">{{property.price}} dt</div>
+
+            <a href="{{path('contact')}}" class="btn btn-primary">Contactez l'agence</a>
+            <p>{{property.description | nl2br}}</p>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+    <h2> Caractéristiques </h2>
+        <table class="table table-info">
+            <tr>
+            <td>Surface habitable</td>
+            <td>{{property.surface}}</td>
+            
+            </tr>
+            <tr>
+            
+            <td>pièces</td>
+            <td>{{property.rooms}}</td>
+            </tr>
+            <tr>
+            
+            <td>nombre de chambre</td>
+            <td>{{property.bedrooms}}</td>
+            </tr>
+            <tr>
+            
+            <td>Nombre d'étages</td>
+            <td>{{property.floor}}</td>
+            </tr>
+            <tr>
+            
+            <td>Chauffage</td>
+            <td>{{property.heat}}</td>
+            </tr>
+
+        </table>
+        </div>
+
+</div>
+    <h2>Les biens phares</h2>
+
+    <div class="row">
+        {% for property in latest%}
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <img class="card-img-top" src="{{ asset(property.path) }}" alt="{{ property.title }}">
+                <div class="card-body">
+                    <a href="{{ path('property.show', {id : property.id}) }}" class="card-title">{{ property.title }}</a>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ property.price | number_format(0,'',' ')}} dt</h6>
+                    <p class="card-text">{{ property.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('property.show', {id : property.id}) }}" class="btn btn-primary">Détails</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+
+    <!-- /.row -->
+
+
+
+
+{% endblock %}
